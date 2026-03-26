@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="analytics">
+    <h3>📊 Insights</h3>
+
+    <p><b>💰 Highest Value Order:</b>
+        {{ highest_order.customer_name }} - ₹{{ highest_order.total_amount }}
+    </p>
+
+    <p><b>🔥 Most Active Customer:</b>
+        {{ active_customer.customer_name }} ({{ active_customer.order_count }} orders)
+    </p>
+</div>
+
+{% if history %}
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+
+    {% for order in history %}
+    <tr>
+        <td>{{ order.order_id }}</td>
+        <td>{{ order.customer_name }}</td>
+        <td>{{ order.product_name }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.price }}</td>
+        <td>{{ order.total_amount }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+
+<p style="text-align:center; font-size:18px;">
+    🚫 No orders found in database
+</p>
+
+{% endif %}
+
+{% endblock %}
